@@ -85,7 +85,6 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
 });
 
 exports.aliasTopTours = (req, res, next) => {
-  console.log(req.query, 'called get cheap tours query');
   req.query.limit = '5';
   req.query.sort = '-ratingsAverage,price';
   req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
@@ -153,7 +152,6 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
   //are go and their name..here limit is an example that
   //shows that we can get only 12 objects out of all.
   const year = req.params.year * 1; // 2021
-  console.log(req.params.year, 'yearrrrrrr');
 
   const plan = await Tour.aggregate([
     {
@@ -248,9 +246,7 @@ exports.getToursWithin = catchAsync(async (req, res, next) => {
 //near: This specifies the point from which distances are calculated. In your case, it's [72.543945, 23.013658] (Ahmedabad).
 //spherical: true: This option tells MongoDB to use spherical geometry (i.e., it assumes the Earth is a sphere, which is more accurate for geographic calculations).
 exports.getDistances = catchAsync(async (req, res, next) => {
-  console.log('Distances:api-------------');
   const { latlng, unit } = req.params;
-  console.log('Received latlng:', latlng);
   const [lat, lng] = latlng.split(',');
 
   const multiplier = unit === 'mi' ? 0.000621371 : 0.001;
@@ -283,8 +279,6 @@ exports.getDistances = catchAsync(async (req, res, next) => {
       },
     },
   ]);
-
-  console.log('Distances:', distances);
 
   res.status(200).json({
     status: 'success',

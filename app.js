@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const compression = require('compression')
 
 const AppError = require("./../nature-node/utils/appError")
 const handleGlobalError = require("./../nature-node/controller/errorController")
@@ -54,13 +55,14 @@ app.use(
   })
 );
 
+app.use(compression());
+
 // Serving static files
 //app.use(express.static(`${__dirname}/public`));
 
 // Test middleware
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
-  // console.log(req.headers);
   next();
 });
 
