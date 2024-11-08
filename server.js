@@ -10,7 +10,7 @@ process.on('uncaughtException', err => {
 const app = require('./app');
 const mongoose = require('mongoose');
 
-const port = process.env.port || 3000; //process is internal in node
+const port = process.env.PORT || 3000; //process is internal in node
 const DB = process.env.DATABASE;
 
 mongoose
